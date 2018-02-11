@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<script src="js/pdfmake.min.js"></script>
+		<script src="js/vfs_fonts.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+	.menus{
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding: 1em;
+		background: linear-gradient(white, lightgreen);
+		cursor: pointer;
+		border-radius: 1em;
+		z-index: 100;
+	}
+	.menu{
+		font-size: 0;
+		transition: all 1s;
+		padding: 1em;
+		border-radius: 1em;
+		background: linear-gradient(white,lightgreen);
+		float: left;
+		margin: 1em;
+	}
+	.menus:hover > .menu{
+		font-size: 1em;
+	}
+	.submenu{
+		font-size: 0;
+		transition: all 1s;
+		padding: 1em;
+		border-radius: 1em;
+		background: linear-gradient(lightgreen,white);
+		margin: 1em;
+	}
+	.menu:hover > .submenu{
+		font-size: 1em;
+	}
+	.logo{
+		position: absolute;
+		left: 20%;
+		top: 0;
+		width: 60%;
+		height: 2em;
+		text-align: center;
+		z-index: 1;
+		text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
+		font-size: 1.5em;
+	}
+	.logo>span{
+		width: 100%;
+		float: left;
+		text-align: center;
+	}
+	@keyframes example {
+    0%   {background-color: rgb(91, 245, 112);}
+    10%   {background-color: rgb(101, 244, 122);}
+    20%   {background-color: rgb(111, 243, 132);}
+    30%   {background-color: rgb(121, 242, 142);}
+    40%   {background-color: rgb(131, 241, 152);}
+    50%   {background-color: rgb(141, 240, 162);}
+    60%   {background-color: rgb(151, 239, 172);}
+    70%   {background-color: rgb(161, 238, 182);}
+    80%   {background-color: rgb(171, 237, 192);}
+    90%   {background-color: rgb(181, 236, 202);}
+    100% {background-color: rgb(191, 235, 212);}
+	}
+	.pagecontent1{
+		position: absolute;
+		left: 0;
+		width: 30%;
+		bottom: 0;
+	}
+	.subpagecontent1{
+		width: 90%;
+		float: left;
+		background-color: lightgreen;
+	}
+	.pagecontent3{
+		position: absolute;
+		left: 31%;
+		width: 68%;
+		bottom: 0;
+		overflow: scroll;
+	}
+</style>
+	</head>
+	<body>
+		<div class="menus">Menu
+			<br>
+			<br>
+			<br>
+			<br>
+			<div class="menu">Case
+			<br>
+			<br>
+				<div class="submenu">Case Entry</div>
+				<div class="submenu">Case Modification</div>
+				<div class="submenu">Case Modification</div>
+				<div class="submenu">Case Modification</div>
+			</div>
+			<div class="menu">BLA
+			<br>
+			<br>
+				<div class="submenu" onclick="getBLA1(1)">Enter BLA particulars</div>
+				<div class="submenu" onclick="getBLA2(2)">Edit BLA particulars</div>
+				<div class="submenu" onclick="getBLA(3)">Search status of BLA</div>
+				<div class="submenu" onclick="getBLA(4)">List of cancelled BLA</div>
+				<div class="submenu" onclick="getBLA(5)">List of rejected BLA</div>
+				<div class="submenu" onclick="getBLA(6)">List of pending BLA</div>
+				<div class="submenu" onclick="getBLA(7)">Full BLA list</div>
+				<div class="submenu" onclick="getBLA(8)">BLA list of Dhaka Region</div>
+				<div class="submenu" onclick="getBLA(9)">BLA list of Chittagong Region</div>
+				<div class="submenu" onclick="getBLA(10)">BLA list of Sylhet Region</div>
+				<div class="submenu" onclick="getBLA(11)">BLA list of Rangpur Region</div>
+			</div>
+			<div class="menu">Report
+				<br>
+				<br>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+				<div class="submenu">Generate Report</div>
+			</div>
+			<div class="menu">Miscellaneous</div>
+			<div class="menu">Cases of the week</div>
+			<div class="menu">Upcoming cases</div>
+		</div>
+		<div class="logo"><img src="image/sblbd.jpg" alt="" style="width:8em;height:3em;"><span>Case Management Systems,Standard Bank Limited</span></div>
+		<div class="pagecontent1">
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+			<div class="subpagecontent1"></div>
+		</div>
+		<div class="pagecontent2"></div>
+		<div class="pagecontent3"></div>
+		<script>
+		document.getElementsByClassName("pagecontent1")[0].style.height=.7*document.documentElement.clientHeight+"px";
+		document.getElementsByClassName("pagecontent3")[0].style.height=.7*document.documentElement.clientHeight+"px";
+		//alert(document.documentElement.clientWidth+":"+document.documentElement.clientHeight+":"+window.devicePixelRatio);
+		var getBLA=function(num){
+			console.log(num);
+			var xhttp = new XMLHttpRequest();
+  			xhttp.onreadystatechange = function() {
+   		 	if (this.readyState == 4 && this.status == 200) {
+     			var response=this.responseText;
+				var unsplitedrows=response.split("|||");
+				var splitedrows=[];
+				splitedrows.push(["Name of Region","Name of BLA","Type","Date of Enlistment","Date of Renewal/Expiry","Date of cancellation","Address with phone"]);
+				for(var i=0;i<unsplitedrows.length-1;i++){
+				splitedrows.push(unsplitedrows[i].split("///"));
+				}
+				console.log(splitedrows);
+				//
+				
+				if (document.documentElement.clientWidth/window.devicePixelRatio <= 640) {
+					//alert("I am a mobile");
+					var table="<table>";
+					var styleindicator=1;
+					for (let index = 0; index < splitedrows.length; index++) {
+						if(styleindicator==1){var tr="<tr style='background-color:#fff0c2;'>";styleindicator=2;}
+						else{var tr="<tr style='background-color:#e0ff84;'>";styleindicator=1;}
+						for (let index1 = 0; index1 < splitedrows[index].length; index1++) {
+							var td="<td style='font-size:12px;'>"+splitedrows[index][index1]+"</td>";
+							tr=tr+td;
+						}
+						table=table+tr+"</tr>";
+					}
+					document.getElementsByClassName("pagecontent3")[0].innerHTML=table+"</table>";
+				}else{
+				//alert("i am a computer");
+					////////
+				var docDefinition={
+                  pageSize:"A4",
+				  pageOrientation:"landscape",
+				  pageMargin:[2,2,2,2],
+                content:[
+                    {
+                        table:{
+							fontSize:8,
+							dontBreakRows:true,
+                            headerRows:1,
+                            //widths:["Sl No.","Name of Region","Name of Lawyer","Senior Panel Lawyer/Panel Lawyer","Date of Enlistment/Renewal & Expiry","Address with contact no."],
+                            widths:["8%","17%","10%","10%","10%","10%","35%"],
+                            body: splitedrows
+                        }
+                    }
+                	]
+              	};
+				  const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+				  pdfDocGenerator.getDataUrl((dataUrl) => {
+            	const targetElement=document.getElementsByClassName("pagecontent3")[0];
+            	document.getElementsByClassName("pagecontent3")[0].innerHTML="";
+            	const iframe = document.createElement('iframe');
+				iframe.setAttribute("style","width:100%;height:100%;margin:0;padding:0;");
+            	iframe.src = dataUrl;
+            	iframe.setAttribute("id","iframe");
+				targetElement.innerHTML="";
+            	targetElement.appendChild(iframe);
+            	});	
+				//
+				}
+			  }
+			  
+  			};
+  			xhttp.open("GET", "getbla.php?num="+num, true);
+  			xhttp.send();
+		}
+		var getBLA1=function(num){
+			var fields=["Name of region","Name of BLA","Type","Date of Enlistment","Date of Expiry","Date of Cancellation","Address with phone"];
+			var text ="<tr style='width:100%;'><td style='width:50%;'>"+fields[0]+"</td><td style='width:50%;'></td></tr>";
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[1]+"</td><td style='width:50%;'><textarea rows='5' cols='50'></textarea></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[2]+"</td><td style='width:50%;'><textarea rows='5' cols='50'></textarea></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[3]+"</td><td style='width:50%;'><input type='text' class='datepicker'></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[4]+"</td><td style='width:50%;'><input type='text' class='datepicker'></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[5]+"</td><td style='width:50%;'><input type='text' class='datepicker'></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[6]+"</td><td style='width:50%;'><textarea rows='5' cols='50'></textarea></td></tr>";			
+			text=text+"<tr style='width:100%;'><td></td><td> <button type='submit' onclick='insertBLA(event)'>Submit</button></td></tr>";			
+			
+			document.getElementsByClassName("pagecontent3")[0].innerHTML="<table style='border:1em outset #888;width:98%;'>"+text+"</table>";
+			var xhttp = new XMLHttpRequest();
+  			xhttp.onreadystatechange = function() {
+  			  if (this.readyState == 4 && this.status == 200) {
+				document.getElementsByClassName("pagecontent3")[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML=this.responseText;
+  			  }
+  			};
+  			xhttp.open("GET", "getregionlist.php", true);
+  			xhttp.send();
+
+		  $( function() {
+   			 $( ".datepicker" ).datepicker({
+   			   changeMonth: true,
+   			   changeYear: true,
+				  dateFormat:"yy-mm-dd"				  
+   			 });
+  			} );
+		}
+		var e;
+		var insertBLA=function(event){
+			e=event;
+			var value=[];
+			for (let index = 0; index < 7; index++) {
+				value.push(e.target.parentElement.parentElement.parentElement.children[index].childNodes[1].childNodes[0].value);
+			}
+			console.log(value);
+			if(value[0]=="" || value[1]==""){
+				alert("nothing in the required field/fields");
+				return;
+			}
+			var xhttp = new XMLHttpRequest();
+  			xhttp.onreadystatechange = function() {
+  			  if (this.readyState == 4 && this.status == 200) {
+				if(parseInt(this.responseText)==1)
+				for (let index = 1; index < 7; index++) {
+				e.target.parentElement.parentElement.parentElement.children[index].childNodes[1].childNodes[0].value="";
+				}
+  			  }
+  			};
+  			xhttp.open("GET", "insertbla.php?val1="+escape(value[0])+"&val2="+escape(value[1])+"&val3="+escape(value[2])+"&val4="+escape(value[3])+"&val5="+escape(value[4])+"&val6="+escape(value[5])+"&val7="+escape(value[6]), true);
+  			xhttp.send();
+		}
+		var getBLA2=function(num){
+			var fields=["Name of region","Name of BLA","Type","Date of Enlistment","Date of Expiry","Date of Cancellation","Address with phone"];
+			var text ="<tr style='width:100%;'><td style='width:50%;'>"+fields[0]+"</td><td style='width:50%;'><textarea rows='5' cols='50'></textarea></td></tr>";
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[1]+"</td><td style='width:50%;'></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[2]+"</td><td style='width:50%;'><textarea rows='5' cols='50'></textarea></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[3]+"</td><td style='width:50%;'><input type='text' class='datepicker'></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[4]+"</td><td style='width:50%;'><input type='text' class='datepicker'></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[5]+"</td><td style='width:50%;'><input type='text' class='datepicker'></td></tr>";			
+			text=text+"<tr style='width:100%;'><td style='width:50%;'>"+fields[6]+"</td><td style='width:50%;'><textarea rows='5' cols='50'></textarea></td></tr>";			
+			text=text+"<tr style='width:100%;'><td></td><td> <button type='submit' onclick='editBLA(event)'>Submit</button></td></tr>";			
+			
+			document.getElementsByClassName("pagecontent3")[0].innerHTML="<table style='border:1em outset #888;width:98%;'>"+text+"</table>";
+			var xhttp = new XMLHttpRequest();
+  			xhttp.onreadystatechange = function() {
+  			  if (this.readyState == 4 && this.status == 200) {
+				document.getElementsByClassName("pagecontent3")[0].childNodes[0].childNodes[0].childNodes[1].childNodes[1].innerHTML=this.responseText;
+  			  }
+  			};
+  			xhttp.open("GET", "getblalist.php", true);
+  			xhttp.send();
+
+		  $( function() {
+   			 $( ".datepicker" ).datepicker({
+   			   changeMonth: true,
+   			   changeYear: true,
+				  dateFormat:"yy-mm-dd"
+   			 });
+  			} );
+		}
+		var editBLA=function(event){
+
+		}
+		var makeColor=function(){
+			var r=Math.floor(Math.random()*10);
+			var b=Math.floor(Math.random()*10);
+			if(r>6)r=6;if(b>7)b=7;
+			return "#"+r+"F"+b;
+		}
+		function changeColor(){
+			var div=document.createElement("div");
+			div.setAttribute("class","subpagecontent1");
+			div.setAttribute("style","width:98%;float:left;background:linear-gradient("+makeColor()+","+makeColor()+","+makeColor()+");height:10%;");
+			document.getElementsByClassName("subpagecontent1")[0].parentNode.removeChild(document.getElementsByClassName("subpagecontent1")[0]);
+			document.getElementsByClassName("pagecontent1")[0].appendChild(div);
+		}
+		window.setInterval(changeColor,500);
+		</script>
+	</body>
+</html>
